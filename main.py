@@ -35,10 +35,20 @@ def toggle_wrap():
 # Set up the window
 window = tk.Tk()
 window.title("Simple Text Editor")
+window.geometry("800x600") # Set default size of the window
+
+# Create a frame for the text widget and scrollbar
+frame = tk.Frame(window)
+frame.pack(fill="both", expand=True)
 
 # Set up the text area
-txt_edit = tk.Text(window, wrap="word")
-txt_edit.pack(fill="both", expand=True)
+txt_edit = tk.Text(frame, wrap="word")
+txt_edit.pack(side="left", fill="both", expand=True)
+
+# Add a scrollbar
+scrollbar = tk.Scrollbar(frame, command=txt_edit.yview)
+scrollbar.pack(side="right", fill="y")
+txt_edit.config(yscrollcommand=scrollbar.set)
 
 # Set up the menu
 menu_bar = tk.Menu(window)
